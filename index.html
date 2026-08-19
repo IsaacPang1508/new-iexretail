@@ -1,0 +1,1472 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>iExRetail | AI-Powered Retail Execution</title>
+  <meta name="description" content="AI-powered retail execution, shelf intelligence and field force management for Malaysian brands.">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="images/hero-background.webp" type="image/webp">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="assets/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/bootstrap-icons.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --iex-red: #e8300a;
+      --iex-red-dark: #bd2507;
+      --iex-sky: #38bdf8;
+      --iex-ink: #100f0f;
+      --iex-navy: #101827;
+      --iex-muted: #6b7280;
+      --iex-line: rgba(255, 255, 255, .12);
+    }
+
+    * { scroll-behavior: smooth; }
+    section[id] { scroll-margin-top: 70px; }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      color: #151515;
+      background: #f7f8fb;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      background: rgba(17, 16, 16, .94);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--iex-line);
+      transition: background .25s ease, box-shadow .25s ease;
+    }
+
+    .navbar-brand img { height: 34px; transition: height .25s ease; }
+    .navbar .container { min-height: 72px; transition: min-height .25s ease; }
+    .navbar.is-scrolled { background: rgba(12, 12, 13, .98); box-shadow: 0 12px 34px rgba(0, 0, 0, .2); }
+    .navbar.is-scrolled .container { min-height: 62px; }
+    .navbar.is-scrolled .navbar-brand img { height: 30px; }
+
+    .navbar-nav { align-items: center; gap: .2rem; }
+    .navbar-nav .nav-link {
+      color: rgba(255, 255, 255, .68);
+      font-size: .88rem;
+      font-weight: 700;
+      padding: .65rem .82rem !important;
+    }
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link:focus { color: #fff; }
+    .navbar-actions { display: flex; align-items: center; gap: .55rem; }
+    .navbar-toggler { border-color: rgba(255, 255, 255, .24); }
+    .navbar-toggler:focus { box-shadow: 0 0 0 .2rem rgba(255, 255, 255, .12); }
+
+    .btn-contact {
+      --bs-btn-bg: #1f9d62;
+      --bs-btn-border-color: #1f9d62;
+      --bs-btn-hover-bg: #187c4d;
+      --bs-btn-hover-border-color: #187c4d;
+      --bs-btn-color: #fff;
+      --bs-btn-hover-color: #fff;
+      border-radius: 999px;
+      font-weight: 700;
+      padding: .68rem 1rem;
+    }
+
+    .btn-login {
+      --bs-btn-color: rgba(255, 255, 255, .84);
+      --bs-btn-border-color: rgba(255, 255, 255, .24);
+      --bs-btn-hover-bg: rgba(255, 255, 255, .1);
+      --bs-btn-hover-border-color: rgba(255, 255, 255, .4);
+      --bs-btn-hover-color: #fff;
+      border-radius: 999px;
+      font-weight: 700;
+      padding: .68rem 1rem;
+    }
+
+    .btn-iex {
+      --bs-btn-bg: var(--iex-red);
+      --bs-btn-border-color: var(--iex-red);
+      --bs-btn-hover-bg: var(--iex-red-dark);
+      --bs-btn-hover-border-color: var(--iex-red-dark);
+      --bs-btn-color: #fff;
+      --bs-btn-hover-color: #fff;
+      border-radius: 999px;
+      font-weight: 700;
+      padding: .72rem 1.3rem;
+    }
+
+    .btn-iex-outline {
+      --bs-btn-color: #fff;
+      --bs-btn-border-color: rgba(255, 255, 255, .24);
+      --bs-btn-hover-bg: #fff;
+      --bs-btn-hover-border-color: #fff;
+      --bs-btn-hover-color: #111;
+      border-radius: 999px;
+      font-weight: 700;
+      padding: .72rem 1.3rem;
+    }
+
+    .hero {
+      min-height: 94vh;
+      color: #fff;
+      background:
+        linear-gradient(90deg, rgba(10, 10, 11, .98) 0%, rgba(10, 10, 11, .92) 48%, rgba(10, 10, 11, .64) 100%),
+        url("images/hero-background.webp") center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      padding: 8rem 0 5rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      color: #ffd6cc;
+      background: rgba(232, 48, 10, .16);
+      border: 1px solid rgba(232, 48, 10, .32);
+      border-radius: 999px;
+      padding: .45rem .8rem;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      font-size: clamp(2.75rem, 5vw, 4.9rem);
+      line-height: .98;
+      font-weight: 900;
+      letter-spacing: 0;
+      margin-top: 1.2rem;
+    }
+
+    .text-gradient {
+      color: var(--iex-red);
+      text-shadow: 0 0 26px rgba(232, 48, 10, .22);
+    }
+
+    .hero-copy {
+      max-width: 660px;
+      color: rgba(255, 255, 255, .72);
+      font-size: 1.08rem;
+    }
+
+    .trust-bar {
+      border-top: 1px solid rgba(255, 255, 255, .14);
+      color: rgba(255, 255, 255, .72);
+      font-size: .9rem;
+    }
+
+    .hero-product {
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, .15);
+      border-radius: 8px;
+      background: rgba(8, 12, 18, .9);
+      box-shadow: 0 34px 90px rgba(0, 0, 0, .46);
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+    }
+    .product-topbar { min-height: 46px; display: flex; align-items: center; justify-content: space-between; padding: 0 .9rem; border-bottom: 1px solid rgba(255, 255, 255, .1); color: rgba(255, 255, 255, .64); font-size: .68rem; }
+    .product-live { display: inline-flex; align-items: center; gap: .45rem; color: #86efac; }
+    .product-live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 5px rgba(34, 197, 94, .12); }
+    .product-layout { display: grid; grid-template-columns: 108px minmax(0, 1fr); min-height: 420px; }
+    .product-sidebar { padding: 1rem .75rem; border-right: 1px solid rgba(255, 255, 255, .08); background: rgba(255, 255, 255, .025); }
+    .product-nav-label { color: rgba(255, 255, 255, .35); font-size: .58rem; font-weight: 700; text-transform: uppercase; margin: .3rem .45rem .75rem; }
+    .product-nav-item { display: flex; align-items: center; gap: .5rem; padding: .58rem .55rem; border-radius: 6px; color: rgba(255, 255, 255, .52); font-size: .62rem; margin-bottom: .35rem; }
+    .product-nav-item::before { content: ""; width: 7px; height: 7px; border: 1px solid currentColor; border-radius: 2px; }
+    .product-nav-item.active { color: #fff; background: rgba(232, 48, 10, .18); }
+    .product-main { padding: 1.15rem; min-width: 0; }
+    .product-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+    .product-heading small { display: block; color: rgba(255, 255, 255, .42); font-size: .6rem; margin-bottom: .25rem; }
+    .product-heading strong { font-size: .95rem; }
+    .product-date { padding: .4rem .55rem; border: 1px solid rgba(255, 255, 255, .1); border-radius: 6px; color: rgba(255, 255, 255, .56); font-size: .58rem; white-space: nowrap; }
+    .product-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .65rem; }
+    .product-metric { min-width: 0; padding: .78rem; border-top: 2px solid var(--metric-color, var(--iex-sky)); background: rgba(255, 255, 255, .055); }
+    .product-metric span { display: block; color: rgba(255, 255, 255, .45); font-size: .56rem; }
+    .product-metric strong { display: block; margin-top: .2rem; font-size: 1.25rem; }
+    .product-chart { height: 132px; display: flex; align-items: flex-end; gap: .55rem; padding: 1.1rem 1rem .65rem; margin-top: .7rem; background: rgba(255, 255, 255, .035); border-bottom: 1px solid rgba(255, 255, 255, .08); }
+    .product-bar { position: relative; flex: 1; height: var(--bar); min-width: 8px; background: linear-gradient(180deg, #5fc7f1 0%, #2698c8 48%, rgba(38, 152, 200, .18) 100%); border-radius: 4px 4px 0 0; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .32); animation: barRise 1.2s ease both; transform-origin: bottom; }
+    .product-bar.issue-bar {
+      background: linear-gradient(180deg, #ff765b 0%, var(--iex-red) 46%, #7f1d0d 100%);
+      border: 1px solid rgba(255, 118, 91, .55);
+      border-bottom: 0;
+      box-shadow: 0 0 18px rgba(232, 48, 10, .28), inset 0 1px 0 rgba(255, 255, 255, .48);
+      animation: barRise 1.2s ease .16s both, alertGlow 2.4s ease-in-out 1.4s infinite;
+    }
+    .product-bar.issue-bar::after {
+      content: "";
+      position: absolute;
+      top: 7px;
+      left: 14%;
+      right: 14%;
+      height: 2px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, .62);
+      box-shadow: 0 0 7px rgba(255, 255, 255, .42);
+    }
+    .product-issues { display: grid; gap: .45rem; margin-top: .75rem; }
+    .product-issue { display: flex; align-items: center; justify-content: space-between; gap: .75rem; color: rgba(255, 255, 255, .68); font-size: .57rem; }
+    .product-issue span:last-child { color: #fca5a5; }
+    .hero-signal { position: absolute; right: -12px; bottom: 28px; width: min(240px, 55%); padding: .85rem; border: 1px solid rgba(56, 189, 248, .35); border-radius: 8px; background: rgba(7, 15, 27, .96); box-shadow: 0 18px 48px rgba(0, 0, 0, .4); animation: signalFloat 4s ease-in-out infinite; }
+    .hero-signal strong { display: block; font-size: .72rem; }
+    .hero-signal span { display: block; color: rgba(255, 255, 255, .48); font-size: .58rem; margin-top: .25rem; }
+
+    .brand-strip {
+      background: #fff;
+      border-bottom: 1px solid #e8e9ee;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 999px;
+      padding: .55rem .85rem;
+      background: #fff;
+      color: #404656;
+      font-weight: 600;
+      font-size: .9rem;
+    }
+    .chip i { color: var(--iex-red); font-size: 1rem; }
+
+    .section-pad { padding: 5.5rem 0; }
+    .section-tag { color: var(--iex-red); font-weight: 800; text-transform: uppercase; font-size: .82rem; }
+    .section-title { font-size: clamp(2rem, 4vw, 3.6rem); line-height: 1.05; font-weight: 900; letter-spacing: 0; }
+    .section-desc { color: var(--iex-muted); max-width: 720px; }
+
+    .feature-card {
+      border: 1px solid #e7e9ef;
+      border-radius: 8px;
+      box-shadow: 0 18px 46px rgba(16, 24, 39, .07);
+      height: 100%;
+    }
+
+    .feature-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      display: inline-grid;
+      place-items: center;
+      background: #fff1ed;
+      color: var(--iex-red);
+      font-weight: 900;
+    }
+
+    .dark-section {
+      color: #fff;
+      background:
+        linear-gradient(180deg, rgba(16, 24, 39, .94), rgba(12, 14, 18, .96)),
+        url("images/ai-section-background.webp") center/cover no-repeat;
+    }
+
+    .dark-card {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 8px;
+      height: 100%;
+    }
+
+    .dashboard-panel {
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 8px;
+      box-shadow: 0 26px 70px rgba(0, 0, 0, .28);
+      overflow: hidden;
+    }
+
+    .metric {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .price-card {
+      border: 1px solid #e7e9ef;
+      border-radius: 8px;
+      height: 100%;
+      min-width: 0;
+    }
+
+    .price-card.featured {
+      border-color: rgba(232, 48, 10, .5);
+      box-shadow: 0 24px 60px rgba(232, 48, 10, .12);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(210px, 1fr));
+      gap: 1rem;
+    }
+    .pricing-includes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .65rem 1.25rem;
+      padding: 1rem 1.15rem;
+      margin-bottom: 1.25rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background: #f8fafc;
+      color: #374151;
+      font-size: .76rem;
+      font-weight: 700;
+    }
+    .pricing-includes span { display: inline-flex; align-items: center; gap: .4rem; }
+    .pricing-includes i { color: #15905a; }
+    .plan-label { min-height: 2.6rem; color: var(--iex-muted); font-size: .72rem; }
+    .plan-price { font-size: clamp(1.7rem, 3vw, 2.25rem); font-weight: 900; line-height: 1; }
+    .plan-period { color: var(--iex-muted); font-size: .68rem; }
+    .plan-discounts { display: grid; gap: .35rem; min-height: 4rem; margin: 1rem 0; }
+    .plan-discount { padding: .38rem .5rem; border-radius: 5px; background: #f1f5f9; color: #475569; font-size: .64rem; font-weight: 700; }
+    .plan-list { display: grid; gap: .55rem; padding: 0; margin: 0 0 1.2rem; list-style: none; color: #4b5563; font-size: .72rem; }
+    .plan-list li { display: flex; gap: .45rem; align-items: flex-start; }
+    .plan-list i { color: #15905a; margin-top: .05rem; }
+    .plan-capacity { margin-top: auto; padding-top: 1rem; border-top: 1px solid #e5e7eb; color: #374151; font-size: .67rem; font-weight: 700; }
+    .pricing-note { color: #6b7280; font-size: .67rem; line-height: 1.6; }
+    .pricing-details .accordion-item { border-color: #e5e7eb; }
+    .pricing-details .accordion-button { font-weight: 700; }
+    .pricing-details .accordion-button:not(.collapsed) { color: #151515; background: #fff4f1; box-shadow: none; }
+    .pricing-table { min-width: 820px; font-size: .72rem; }
+    .pricing-table th { white-space: nowrap; }
+
+    .demo-stage {
+      background: linear-gradient(180deg, #0b111c 0%, #101827 100%);
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .demo-tabs {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: .55rem;
+      overflow-x: auto;
+      padding: .35rem 0 .75rem;
+      scrollbar-width: thin;
+    }
+    .demo-tabs .nav-link {
+      min-width: max-content;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 6px;
+      color: rgba(255, 255, 255, .66);
+      background: rgba(255, 255, 255, .04);
+      font-size: .76rem;
+      font-weight: 700;
+      padding: .75rem 1rem;
+    }
+    .demo-tabs .nav-link.active { color: #fff; border-color: var(--iex-red); background: var(--iex-red); }
+    .demo-panel { padding-top: clamp(1.5rem, 4vw, 3rem); }
+    .demo-instruction { display: inline-flex; align-items: center; gap: .45rem; color: #bae6fd; font-size: .76rem; font-weight: 700; }
+    .scan-result {
+      margin-top: 1rem;
+      padding: .85rem 1rem;
+      border-left: 3px solid var(--iex-sky);
+      background: rgba(56, 189, 248, .09);
+      color: rgba(255, 255, 255, .72);
+      font-size: .75rem;
+    }
+    .detection-box { appearance: none; background: transparent; padding: 0; cursor: pointer; }
+    .detection-box:focus-visible,
+    .detection-box.is-active { outline: 3px solid rgba(255, 255, 255, .9); outline-offset: 3px; }
+
+    .scan-phone {
+      position: relative;
+      min-height: 520px;
+      border-radius: 28px;
+      padding: 18px;
+      background: linear-gradient(145deg, #202938, #080b10);
+      border: 1px solid rgba(255, 255, 255, .16);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, .35);
+      overflow: hidden;
+    }
+
+    .scan-screen {
+      position: relative;
+      height: 100%;
+      min-height: 480px;
+      border-radius: 18px;
+      background: #121826;
+      overflow: hidden;
+    }
+
+    .scan-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .scan-screen::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(4, 8, 13, .05), rgba(4, 8, 13, .58)); pointer-events: none; }
+    .scan-status { position: absolute; z-index: 3; left: 1rem; top: 1rem; display: inline-flex; align-items: center; gap: .45rem; padding: .45rem .6rem; border-radius: 6px; color: #d8f7ff; background: rgba(7, 13, 24, .82); border: 1px solid rgba(56, 189, 248, .45); font-size: .66rem; font-weight: 700; }
+    .scan-status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--iex-sky); box-shadow: 0 0 10px var(--iex-sky); }
+    .detection-box { position: absolute; z-index: 2; border: 2px solid var(--iex-sky); border-radius: 4px; box-shadow: 0 0 0 1px rgba(0, 0, 0, .35), inset 0 0 22px rgba(56, 189, 248, .13); }
+    .detection-box.issue { border-color: var(--iex-red); box-shadow: 0 0 0 1px rgba(0, 0, 0, .35), inset 0 0 22px rgba(232, 48, 10, .14); }
+    .detection-box.one { left: 8%; top: 12%; width: 31%; height: 17%; }
+    .detection-box.two { right: 6%; top: 31%; width: 30%; height: 18%; }
+    .detection-box.three { left: 9%; bottom: 19%; width: 28%; height: 18%; }
+
+    .scan-line {
+      position: absolute;
+      inset-inline: 0;
+      height: 4px;
+      top: 10%;
+      background: linear-gradient(90deg, transparent, var(--iex-sky), #fff, var(--iex-sky), transparent);
+      box-shadow: 0 0 30px rgba(56, 189, 248, .9);
+      animation: scanMove 3.2s ease-in-out infinite;
+    }
+
+    .scan-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(56, 189, 248, .1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, .1) 1px, transparent 1px);
+      background-size: 34px 34px;
+      opacity: .7;
+      animation: gridPulse 3.2s ease-in-out infinite;
+    }
+
+    .scan-tag {
+      position: absolute;
+      z-index: 3;
+      border: 1px solid rgba(56, 189, 248, .78);
+      background: rgba(7, 13, 24, .82);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, .35);
+      border-radius: 8px;
+      padding: .58rem .7rem;
+      font-size: .76rem;
+      font-weight: 800;
+      animation: tagFloat 3.8s ease-in-out infinite;
+    }
+
+    .scan-tag small {
+      display: block;
+      color: rgba(255, 255, 255, .58);
+      font-weight: 600;
+      margin-top: .1rem;
+    }
+
+    .scan-tag.one { left: 10%; top: 22%; }
+    .scan-tag.two { right: 8%; top: 45%; animation-delay: .8s; border-color: rgba(232, 48, 10, .82); }
+    .scan-tag.three { left: 16%; bottom: 14%; animation-delay: 1.4s; }
+
+    .workflow-card {
+      position: relative;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .06);
+      overflow: hidden;
+    }
+
+    .workflow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      background: rgba(255, 255, 255, .045);
+      transition: border-color .35s ease, background .35s ease, transform .35s ease;
+    }
+
+    .workflow-step.active {
+      border-color: rgba(232, 48, 10, .72);
+      background: rgba(232, 48, 10, .15);
+      transform: translateX(8px);
+    }
+
+    .step-number {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, .12);
+      color: #fff;
+      font-size: .8rem;
+      font-weight: 900;
+    }
+
+    .workflow-step.active .step-number { background: var(--iex-red); }
+
+    .comparison-wrap {
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .055);
+      padding: clamp(1rem, 3vw, 1.5rem);
+    }
+
+    .comparison-frame {
+      --compare-position: 50%;
+      position: relative;
+      min-height: 430px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #111827;
+      isolation: isolate;
+    }
+
+    .comparison-side {
+      position: absolute;
+      inset: 0;
+      padding: clamp(1rem, 3vw, 2rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .comparison-before {
+      background:
+        linear-gradient(rgba(3, 7, 12, .7), rgba(3, 7, 12, .76)),
+        url("images/retail-shelf-ai.webp") center/cover no-repeat;
+    }
+
+    .comparison-after {
+      clip-path: inset(0 0 0 var(--compare-position));
+      background:
+        linear-gradient(rgba(255, 255, 255, .04), rgba(255, 255, 255, .08)),
+        url("images/retail-shelf-ai.webp") center/cover no-repeat;
+    }
+
+    .comparison-kicker {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      gap: .5rem;
+      padding: .45rem .7rem;
+      border-radius: 6px;
+      background: rgba(4, 8, 14, .78);
+      border: 1px solid rgba(255, 255, 255, .14);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .comparison-after .comparison-kicker { margin-left: auto; background: rgba(13, 148, 136, .94); border-color: rgba(153, 246, 228, .42); }
+
+    .comparison-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .65rem;
+      width: min(100%, 520px);
+    }
+
+    .comparison-after .comparison-stats { margin-left: auto; }
+
+    .comparison-after .comparison-stat {
+      color: #101827;
+      background: rgba(255, 255, 255, .9);
+      border-color: rgba(255, 255, 255, .72);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .16);
+    }
+
+    .comparison-after .comparison-stat span { color: rgba(16, 24, 39, .62); }
+
+    .comparison-stat {
+      min-width: 0;
+      padding: .8rem;
+      border-radius: 6px;
+      background: rgba(4, 8, 14, .82);
+      border: 1px solid rgba(255, 255, 255, .13);
+      backdrop-filter: blur(8px);
+    }
+
+    .comparison-stat strong {
+      display: block;
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      line-height: 1.2;
+    }
+
+    .comparison-stat span {
+      display: block;
+      color: rgba(255, 255, 255, .62);
+      font-size: .7rem;
+      margin-top: .2rem;
+    }
+
+    .comparison-divider {
+      position: absolute;
+      z-index: 4;
+      inset-block: 0;
+      left: var(--compare-position);
+      width: 3px;
+      transform: translateX(-50%);
+      background: #fff;
+      box-shadow: 0 0 18px rgba(255, 255, 255, .72);
+      pointer-events: none;
+    }
+
+    .comparison-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 46px;
+      height: 46px;
+      transform: translate(-50%, -50%);
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #111827;
+      background: #fff;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, .35);
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .comparison-range {
+      position: absolute;
+      z-index: 5;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: ew-resize;
+    }
+
+    .comparison-help {
+      color: rgba(255, 255, 255, .58);
+      font-size: .78rem;
+    }
+
+    .impact-flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 1rem; border-top: 1px solid rgba(255, 255, 255, .1); }
+    .impact-step { position: relative; padding: 1rem .75rem .2rem; color: rgba(255, 255, 255, .5); font-size: .66rem; }
+    .impact-step:not(:last-child)::after { content: ""; position: absolute; top: 1.35rem; right: -.25rem; width: .5rem; height: .5rem; border-top: 1px solid rgba(255, 255, 255, .36); border-right: 1px solid rgba(255, 255, 255, .36); transform: rotate(45deg); }
+    .impact-step strong { display: block; color: #fff; font-size: .72rem; margin-bottom: .2rem; }
+    .demo-note { display: inline-flex; align-items: center; gap: .4rem; color: rgba(255, 255, 255, .48); font-size: .68rem; margin-top: .8rem; }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .reveal.reveal-left { transform: translateX(-24px); }
+    .reveal.reveal-left.is-visible { transform: translateX(0); }
+    .reveal.reveal-scale { transform: scale(.96); }
+    .reveal.reveal-scale.is-visible { transform: scale(1); }
+
+
+    .pulse-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, .7);
+      animation: pulseDot 1.8s infinite;
+    }
+
+    @keyframes scanMove {
+      0%, 100% { top: 10%; opacity: .25; }
+      12% { opacity: 1; }
+      50% { top: 88%; opacity: 1; }
+      88% { opacity: 1; }
+    }
+
+    @keyframes gridPulse {
+      0%, 100% { opacity: .28; }
+      50% { opacity: .72; }
+    }
+
+    @keyframes tagFloat {
+      0%, 100% { transform: translateY(0); opacity: .72; }
+      50% { transform: translateY(-8px); opacity: 1; }
+    }
+
+    @keyframes pulseDot {
+      0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, .7); }
+      70% { box-shadow: 0 0 0 14px rgba(34, 197, 94, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+
+    @keyframes barRise { from { transform: scaleY(0); opacity: .2; } to { transform: scaleY(1); opacity: 1; } }
+    @keyframes alertGlow { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.18); } }
+    @keyframes signalFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+    .footer { background: #fff; color: #151515; }
+    .footer-top { padding: 4rem 0 3rem; border-bottom: 1px solid rgba(0, 0, 0, .08); }
+    .footer-top-inner {
+      display: grid;
+      grid-template-columns: minmax(220px, .9fr) minmax(0, 2fr);
+      gap: clamp(2.5rem, 6vw, 5rem);
+      align-items: start;
+    }
+    .footer-logo-img {
+      width: auto;
+      height: 30px;
+      margin-bottom: 1.15rem;
+      filter: brightness(0);
+      opacity: .78;
+    }
+    .footer-tagline {
+      max-width: 290px;
+      color: rgba(0, 0, 0, .52);
+      font-size: .78rem;
+      line-height: 1.75;
+      margin-bottom: 1.35rem;
+    }
+    .footer-social { display: flex; flex-wrap: wrap; gap: .55rem; }
+    .footer-social a {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      padding: 8px;
+      border: 1px solid rgba(0, 0, 0, .09);
+      border-radius: 8px;
+      background: #f6f7f9;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .footer-social a:hover {
+      transform: translateY(-2px);
+      background: #fff0ec;
+      border-color: rgba(232, 48, 10, .28);
+    }
+    .footer-social img { width: 100%; height: 100%; object-fit: contain; filter: brightness(0); opacity: .7; }
+    .footer-links-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; }
+    .footer-link-col h4 {
+      margin: 0 0 1rem;
+      color: rgba(0, 0, 0, .82);
+      font-size: .7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .footer-link-col ul { list-style: none; display: grid; gap: .62rem; padding: 0; margin: 0; }
+    .footer-link-col a {
+      color: rgba(0, 0, 0, .5);
+      font-size: .76rem;
+      line-height: 1.5;
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+    .footer-link-col a:hover { color: var(--iex-red); }
+    .footer-bottom { padding: 1.1rem 0; }
+    .footer-bottom-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+    .footer-bottom p { margin: 0; color: rgba(0, 0, 0, .42); font-size: .7rem; }
+    .footer-bottom-right {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      color: rgba(0, 0, 0, .42);
+      font-size: .7rem;
+    }
+    .footer-partner-logo {
+      display: block;
+      width: auto;
+      max-width: 100px;
+      height: 34px;
+      object-fit: contain;
+      filter: grayscale(1);
+      opacity: .58;
+      transition: opacity .2s ease;
+    }
+    .footer-partner-logo.fulfillpoint { height: 30px; }
+    .footer-partner-logo:hover { opacity: .68; }
+    .footer-interact-logo {
+      display: block;
+      width: auto;
+      height: 30px;
+      max-width: 132px;
+      object-fit: contain;
+      filter: brightness(0) saturate(100%) opacity(.74);
+      transition: filter .2s ease;
+    }
+    .footer-interact-logo:hover { filter: brightness(0) saturate(100%) opacity(1); }
+    .footer-dot { color: rgba(0, 0, 0, .26); }
+
+    @media (max-width: 991.98px) {
+      .hero { min-height: auto; padding-top: 7rem; }
+      .hero h1 { font-size: 3.2rem; }
+      .hero-product { margin-top: 1rem; }
+      .hero-signal { right: 12px; }
+      .scan-phone { min-height: 440px; }
+      .scan-screen { min-height: 400px; }
+      .comparison-frame { min-height: 380px; }
+      .footer-top-inner { grid-template-columns: 1fr; }
+      .footer-tagline { max-width: 420px; }
+      .footer-links-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .navbar-collapse { padding: .75rem 0 1rem; }
+      .navbar-nav { align-items: stretch; }
+      .navbar-actions { flex-wrap: wrap; padding-top: .75rem; }
+      .pricing-grid { overflow-x: auto; grid-template-columns: repeat(5, minmax(245px, 78vw)); padding-bottom: .75rem; scroll-snap-type: x proximity; }
+      .price-card { scroll-snap-align: start; }
+    }
+
+    @media (max-width: 575.98px) {
+      .hero .row,
+      .section-pad .row { --bs-gutter-x: 1.5rem; }
+      .navbar .btn-iex, .navbar .btn-contact, .navbar .btn-login { padding: .58rem .8rem; font-size: .7rem; }
+      .navbar-brand img { height: 28px; }
+      .product-layout { grid-template-columns: 1fr; min-height: 390px; }
+      .product-sidebar { display: none; }
+      .product-main { padding: .85rem; }
+      .product-metrics { gap: .4rem; }
+      .product-metric { padding: .58rem; }
+      .product-metric strong { font-size: 1rem; }
+      .hero-signal { position: relative; right: auto; bottom: auto; width: auto; margin: .75rem; animation: none; }
+      .comparison-frame { min-height: 420px; }
+      .comparison-side { padding: 1rem; }
+      .comparison-stats { grid-template-columns: 1fr; width: 72%; }
+      .comparison-after .comparison-stats { margin-left: auto; }
+      .comparison-stat { padding: .58rem .65rem; }
+      .footer-top { padding: 3rem 0 2.25rem; }
+      .footer-links-grid { gap: 1.75rem 1.25rem; }
+      .footer-bottom-inner { flex-direction: column; text-align: center; }
+      .footer-bottom-right { justify-content: center; flex-wrap: wrap; }
+      .impact-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .impact-step:nth-child(2)::after { display: none; }
+      .demo-tabs .nav-link { font-size: .7rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#hero" aria-label="iExRetail home">
+        <img src="images/iExRetail Logo_White_ver_ai_OL.png" alt="iExRetail">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNavigation">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="#product-demo">Product Demo</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+          <li class="nav-item"><a class="nav-link" href="#signup">Sign-Up</a></li>
+        </ul>
+        <div class="navbar-actions">
+          <a class="btn btn-login" href="https://staging-iexpress.interact.com.my/login/" target="_blank" rel="noopener">Login</a>
+          <a class="btn btn-iex" href="#signup">Sign-Up</a>
+          <a class="btn btn-contact" href="https://wa.me/60105677881?text=Hi%21%20My%20name%20is%20%7Btype%20your%20name%20here%7D%2C%20I%27m%20interested%20to%20find%20out%20more%20about%20iExRetail" target="_blank" rel="noopener">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <span class="eyebrow">AI-powered retail execution SaaS</span>
+            <h1>Right Product.<br>Right Shelf.<br><span class="text-gradient">Right Proof.</span></h1>
+            <p class="hero-copy mt-4 mb-4">iExRetail helps brands manage offline execution with AI verification, shelf auditing, field force management and O2O activation in one unified SaaS platform.</p>
+            <div class="d-flex flex-wrap gap-3">
+              <a href="https://wa.me/60105677881?text=Hi%21%20My%20name%20is%20%7Btype%20your%20name%20here%7D%2C%20I%27m%20interested%20to%20find%20out%20more%20about%20iExRetail" class="btn btn-contact" target="_blank" rel="noopener">Contact Us</a>
+              <a href="#features" class="btn btn-iex-outline">See Features</a>
+            </div>
+            <div class="trust-bar d-flex flex-wrap gap-3 gap-lg-4 mt-5 pt-4">
+              <span>&#10003; Unlimited products &amp; outlets</span>
+              <span>&#10003; Plans from RM0</span>
+              <span>&#10003; Malaysia-ready</span>
+              <span>&#10003; Powered by Interact</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="hero-product" aria-label="iExRetail outlet command center preview">
+              <div class="product-topbar">
+                <span>iExRetail / Demo workspace</span>
+                <span class="product-live">Live monitoring</span>
+              </div>
+              <div class="product-layout">
+                <aside class="product-sidebar" aria-label="Product preview navigation">
+                  <div class="product-nav-label">Workspace</div>
+                  <div class="product-nav-item active">Overview</div>
+                  <div class="product-nav-item">Outlets</div>
+                  <div class="product-nav-item">Tasks</div>
+                  <div class="product-nav-item">AI Review</div>
+                  <div class="product-nav-item">Reports</div>
+                </aside>
+                <div class="product-main">
+                  <div class="product-heading">
+                    <div><small>Malaysia retail network</small><strong>Execution Overview</strong></div>
+                    <span class="product-date">This week</span>
+                  </div>
+                  <div class="product-metrics">
+                    <div class="product-metric" style="--metric-color:#22c55e"><span>Visits completed</span><strong data-count="248">0</strong></div>
+                    <div class="product-metric" style="--metric-color:#38bdf8"><span>Compliance</span><strong data-count="91" data-suffix="%">0%</strong></div>
+                    <div class="product-metric" style="--metric-color:#e8300a"><span>Open issues</span><strong data-count="36">0</strong></div>
+                  </div>
+                  <div class="product-chart" aria-label="Weekly outlet compliance chart">
+                    <span class="product-bar" style="--bar:55%"></span>
+                    <span class="product-bar" style="--bar:72%"></span>
+                    <span class="product-bar issue-bar" style="--bar:44%" aria-label="Compliance alert"></span>
+                    <span class="product-bar" style="--bar:82%"></span>
+                    <span class="product-bar" style="--bar:68%"></span>
+                    <span class="product-bar" style="--bar:92%"></span>
+                    <span class="product-bar" style="--bar:78%"></span>
+                  </div>
+                  <div class="product-issues">
+                    <div class="product-issue"><span>KL-018 · Missing promotion display</span><span>Needs action</span></div>
+                    <div class="product-issue"><span>JB-042 · Shelf share below target</span><span>AI flagged</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="hero-signal"><strong>AI priority detected</strong><span>Outlet KL-018 requires a corrective visit before 5:00 PM.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="brand-strip py-4">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center gap-2 gap-lg-3">
+          <span class="fw-bold text-secondary me-lg-2">Trusted by teams managing</span>
+          <span class="chip"><i class="bi bi-basket2" aria-hidden="true"></i>FMCG</span>
+          <span class="chip"><i class="bi bi-capsule" aria-hidden="true"></i>H&amp;B / Pharmacy</span>
+          <span class="chip"><i class="bi bi-truck" aria-hidden="true"></i>Distributors</span>
+          <span class="chip"><i class="bi bi-award" aria-hidden="true"></i>Brand Principals</span>
+          <span class="chip"><i class="bi bi-people" aria-hidden="true"></i>Merchandising Agencies</span>
+          <span class="chip"><i class="bi bi-shop" aria-hidden="true"></i>Retail Chains</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad" id="problem">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-lg-8">
+            <div class="section-tag mb-2">The Real Problem</div>
+            <h2 class="section-title">Brands lose at the shelf. <span class="text-gradient">And they rarely know why.</span></h2>
+            <p class="section-desc mt-3">These are the execution gaps that make offline retail hard to manage from headquarters.</p>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6 col-xl-3">
+            <div class="card feature-card p-4">
+              <span class="feature-icon mb-4">01</span>
+              <h5 class="fw-bold">Manual Reporting</h5>
+              <p class="text-secondary mb-0">No standard format, no timestamp, no traceability.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-3">
+            <div class="card feature-card p-4">
+              <span class="feature-icon mb-4">02</span>
+              <h5 class="fw-bold">Out-of-Stocks</h5>
+              <p class="text-secondary mb-0">OOS only discovered days later, too late to act.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-3">
+            <div class="card feature-card p-4">
+              <span class="feature-icon mb-4">03</span>
+              <h5 class="fw-bold">Promo Blind Spots</h5>
+              <p class="text-secondary mb-0">Campaigns launched, but no proof of execution.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-3">
+            <div class="card feature-card p-4">
+              <span class="feature-icon mb-4">04</span>
+              <h5 class="fw-bold">Low Visibility</h5>
+              <p class="text-secondary mb-0">Reports arrive late with no single source of truth.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad demo-stage" id="product-demo">
+      <div class="container">
+        <div class="row align-items-end g-4 mb-4">
+          <div class="col-lg-8">
+            <div class="section-tag mb-2">Product Demo</div>
+            <h2 class="section-title">See how retail execution moves from evidence to action.</h2>
+            <p class="text-white-50 mt-3 mb-0">Explore three connected stages inspired by the live iExRetail experience: audit, visibility and field execution.</p>
+          </div>
+          <div class="col-lg-4">
+            <div class="demo-instruction"><i class="bi bi-hand-index-thumb" aria-hidden="true"></i>Select a tab to explore the workflow</div>
+          </div>
+        </div>
+
+        <ul class="nav demo-tabs" id="demoTabs" role="tablist">
+          <li class="nav-item" role="presentation"><button class="nav-link active" id="audit-tab" data-bs-toggle="tab" data-bs-target="#audit-pane" type="button" role="tab" aria-controls="audit-pane" aria-selected="true">01&nbsp; Merchandising / Audit</button></li>
+          <li class="nav-item" role="presentation"><button class="nav-link" id="visibility-tab" data-bs-toggle="tab" data-bs-target="#visibility-pane" type="button" role="tab" aria-controls="visibility-pane" aria-selected="false">02&nbsp; Shelf Reporting Visibility</button></li>
+          <li class="nav-item" role="presentation"><button class="nav-link" id="fieldforce-tab" data-bs-toggle="tab" data-bs-target="#fieldforce-pane" type="button" role="tab" aria-controls="fieldforce-pane" aria-selected="false">03&nbsp; FieldForce Task Flow</button></li>
+        </ul>
+
+        <div class="tab-content" id="demoTabContent">
+          <div class="tab-pane fade show active demo-panel" id="audit-pane" role="tabpanel" aria-labelledby="audit-tab" tabindex="0">
+            <div class="row align-items-center g-5">
+              <div class="col-lg-5">
+                <div class="section-tag mb-2">Merchandising / Audit</div>
+                <h3 class="section-title">Turn every shelf photo into structured evidence.</h3>
+                <p class="text-white-50 mt-3">iExRetail reviews shelf conditions, promotion compliance and product visibility while the visit is still actionable.</p>
+                <div class="demo-instruction mt-3"><i class="bi bi-cursor" aria-hidden="true"></i>Click a detection box to review the AI finding</div>
+                <div class="scan-result" id="scanResult" aria-live="polite"><strong>Promo Verified:</strong> The submitted display matches the campaign reference at 96% confidence.</div>
+              </div>
+              <div class="col-lg-7">
+                <div class="scan-phone">
+                  <div class="scan-screen">
+                    <img class="scan-photo" src="images/retail-shelf-ai.webp" alt="Retail shelf being reviewed by iExRetail AI" loading="lazy" decoding="async">
+                    <div class="scan-status">Analyzing shelf · Camera 01</div>
+                    <div class="scan-grid"></div>
+                    <div class="scan-line"></div>
+                    <button class="detection-box one is-active" type="button" data-title="Promo Verified" data-result="The submitted display matches the campaign reference at 96% confidence." aria-label="View promotion verification result"></button>
+                    <button class="detection-box issue two" type="button" data-title="Missing SKU" data-result="Two product facings are below the agreed shelf target and require follow-up." aria-label="View missing SKU result"></button>
+                    <button class="detection-box three" type="button" data-title="Shelf Share" data-result="The brand currently holds 42% of the measured category shelf space." aria-label="View shelf share result"></button>
+                    <div class="scan-tag one">Promo Verified <small>Display match 96%</small></div>
+                    <div class="scan-tag two">Missing SKU <small>2 facings below target</small></div>
+                    <div class="scan-tag three">Shelf Share <small>Category share 42%</small></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade demo-panel" id="visibility-pane" role="tabpanel" aria-labelledby="visibility-tab" tabindex="0">
+            <div class="row align-items-center g-5">
+              <div class="col-lg-4">
+                <div class="section-tag mb-2">Shelf Reporting Visibility</div>
+                <h3 class="section-title">Make the operational impact visible.</h3>
+                <p class="text-white-50 mt-3">Drag fully from left to right to compare a manual outlet audit with the same visit processed through iExRetail AI.</p>
+                <div class="d-flex align-items-center gap-2 mt-4 comparison-help"><i class="bi bi-arrows" aria-hidden="true"></i>Drag the divider across the full image</div>
+                <span class="demo-note">Illustrative scenario · replace with verified client data before publishing</span>
+              </div>
+              <div class="col-lg-8">
+                <div class="comparison-wrap">
+                  <div class="comparison-frame" id="comparisonFrame">
+                    <div class="comparison-side comparison-before">
+                      <span class="comparison-kicker">Before: Manual audit</span>
+                      <div class="comparison-stats">
+                        <div class="comparison-stat"><strong>3.5 hrs</strong><span>Reporting time</span></div>
+                        <div class="comparison-stat"><strong>7 gaps</strong><span>Issues missed</span></div>
+                        <div class="comparison-stat"><strong>61%</strong><span>Shelf compliance</span></div>
+                      </div>
+                    </div>
+                    <div class="comparison-side comparison-after">
+                      <span class="comparison-kicker">After: iExRetail AI</span>
+                      <div class="comparison-stats">
+                        <div class="comparison-stat"><strong>4 min</strong><span>Report generated</span></div>
+                        <div class="comparison-stat"><strong>12 flags</strong><span>Issues detected</span></div>
+                        <div class="comparison-stat"><strong>94%</strong><span>Shelf compliance</span></div>
+                      </div>
+                    </div>
+                    <div class="comparison-divider" aria-hidden="true"><span class="comparison-handle"><i class="bi bi-arrows" aria-hidden="true"></i></span></div>
+                    <input class="comparison-range" id="comparisonRange" type="range" min="0" max="100" step="1" value="50" aria-label="Compare before and after iExRetail AI" aria-valuetext="50% before and 50% after">
+                  </div>
+                  <div class="impact-flow" aria-label="Corrective action workflow">
+                    <div class="impact-step"><strong>01 · Detect</strong>AI flags the shelf gap</div>
+                    <div class="impact-step"><strong>02 · Assign</strong>Task reaches field worker</div>
+                    <div class="impact-step"><strong>03 · Verify</strong>New photo proof submitted</div>
+                    <div class="impact-step"><strong>04 · Approve</strong>Manager closes the issue</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade demo-panel" id="fieldforce-pane" role="tabpanel" aria-labelledby="fieldforce-tab" tabindex="0">
+            <div class="row align-items-center g-5">
+              <div class="col-lg-5 order-lg-2">
+                <div class="section-tag mb-2">FieldForce Task Flow</div>
+                <h3 class="section-title">From HQ instruction to manager approval.</h3>
+                <p class="text-white-50 mt-3">Follow how one retail task moves through assignment, field proof, AI review and final approval.</p>
+              </div>
+              <div class="col-lg-7 order-lg-1">
+                <div class="workflow-card p-4">
+                  <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div><div class="text-white-50 small">Campaign: Weekend Shelf Audit</div><div class="h4 fw-bold mb-0">Outlet Execution Timeline</div></div>
+                    <div class="d-flex align-items-center gap-2 text-white-50 small"><span class="pulse-dot"></span>Live workflow</div>
+                  </div>
+                  <div class="d-grid gap-3">
+                    <div class="workflow-step active" data-step="0"><span class="step-number">01</span><div><h6 class="fw-bold mb-1">HQ creates task</h6><p class="text-white-50 mb-0 small">Set outlet list, SKU checklist, proof requirements and due date.</p></div></div>
+                    <div class="workflow-step" data-step="1"><span class="step-number">02</span><div><h6 class="fw-bold mb-1">Field worker accepts</h6><p class="text-white-50 mb-0 small">Assigned merchandiser receives visit instructions and checklist.</p></div></div>
+                    <div class="workflow-step" data-step="2"><span class="step-number">03</span><div><h6 class="fw-bold mb-1">Outlet visit completed</h6><p class="text-white-50 mb-0 small">GPS check-in, timestamp and shelf photos are submitted.</p></div></div>
+                    <div class="workflow-step" data-step="3"><span class="step-number">04</span><div><h6 class="fw-bold mb-1">AI flags issues</h6><p class="text-white-50 mb-0 small">Missing SKU, low facing share and promotion gaps are detected.</p></div></div>
+                    <div class="workflow-step" data-step="4"><span class="step-number">05</span><div><h6 class="fw-bold mb-1">Manager approves</h6><p class="text-white-50 mb-0 small">HQ reviews proof, approves work and exports the report.</p></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad" id="features">
+      <div class="container">
+        <div class="text-center mx-auto mb-5" style="max-width: 760px;">
+          <div class="section-tag mb-2">Key Features</div>
+          <h2 class="section-title">Six execution layers. One unified platform.</h2>
+          <p class="section-desc mx-auto mt-3">Each module works independently or as a unified stack, built to scale from pilot to enterprise.</p>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4"><div class="card feature-card p-4"><span class="feature-icon mb-4"><i class="bi bi-grid-1x2" aria-hidden="true"></i></span><h5 class="fw-bold">Outlet Execution OS</h5><p class="text-secondary mb-0">Plan visits, assign tasks and monitor completion from one dashboard.</p></div></div>
+          <div class="col-md-6 col-lg-4"><div class="card feature-card p-4"><span class="feature-icon mb-4"><i class="bi bi-camera" aria-hidden="true"></i></span><h5 class="fw-bold">Shelf &amp; Display Audit</h5><p class="text-secondary mb-0">Capture shelf condition, promotion compliance and display quality.</p></div></div>
+          <div class="col-md-6 col-lg-4"><div class="card feature-card p-4"><span class="feature-icon mb-4"><i class="bi bi-stars" aria-hidden="true"></i></span><h5 class="fw-bold">AI Visual Intelligence</h5><p class="text-secondary mb-0">Use image review to flag gaps, OOS risk and execution issues faster.</p></div></div>
+          <div class="col-md-6 col-lg-4"><div class="card feature-card p-4"><span class="feature-icon mb-4"><i class="bi bi-people" aria-hidden="true"></i></span><h5 class="fw-bold">FieldForce Marketplace</h5><p class="text-secondary mb-0">Use verified workers for extra coverage, campaigns and urgent checks.</p></div></div>
+          <div class="col-md-6 col-lg-4"><div class="card feature-card p-4"><span class="feature-icon mb-4"><i class="bi bi-qr-code-scan" aria-hidden="true"></i></span><h5 class="fw-bold">O2O Activation</h5><p class="text-secondary mb-0">Connect offline visits to QR campaigns, forms and digital conversion.</p></div></div>
+          <div class="col-md-6 col-lg-4"><div class="card feature-card p-4"><span class="feature-icon mb-4"><i class="bi bi-bar-chart-line" aria-hidden="true"></i></span><h5 class="fw-bold">Management Reports</h5><p class="text-secondary mb-0">Turn field activity into performance trends and decision-ready reports.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad bg-white" id="pricing">
+      <div class="container">
+        <div class="row align-items-end mb-5">
+          <div class="col-lg-7">
+            <div class="section-tag mb-2">Pricing</div>
+            <h2 class="section-title">Start free. Scale when you are ready.</h2>
+          </div>
+          <div class="col-lg-5">
+            <p class="section-desc mb-0">Choose the operating capacity, AI credits and management support that fit your retail programme.</p>
+          </div>
+        </div>
+        <div class="pricing-includes" aria-label="Included in paid packages">
+          <span><i class="bi bi-check-circle-fill" aria-hidden="true"></i>Operating system access</span>
+          <span><i class="bi bi-check-circle-fill" aria-hidden="true"></i>Unlimited products</span>
+          <span><i class="bi bi-check-circle-fill" aria-hidden="true"></i>Unlimited outlets</span>
+          <span><i class="bi bi-check-circle-fill" aria-hidden="true"></i>Basic dashboard</span>
+          <span><i class="bi bi-check-circle-fill" aria-hidden="true"></i>Customizable workflow</span>
+        </div>
+        <div class="pricing-grid">
+          <article class="card price-card p-4 d-flex flex-column">
+            <span class="badge text-bg-secondary align-self-start mb-3">Free Trial</span>
+            <h3 class="h5 fw-bold">Free Trial</h3>
+            <p class="plan-label">7 days limited access for evaluation.</p>
+            <div><span class="plan-price">RM0</span> <span class="plan-period">/ 7 days</span></div>
+            <div class="plan-discounts"><span class="plan-discount">No credit card required</span></div>
+            <ul class="plan-list">
+              <li><i class="bi bi-check2" aria-hidden="true"></i>Limited demo workspace</li>
+              <li><i class="bi bi-check2" aria-hidden="true"></i>Basic dashboard view</li>
+              <li><i class="bi bi-check2" aria-hidden="true"></i>Sample AI review</li>
+            </ul>
+            <div class="plan-capacity">1 admin + sample workspace</div>
+            <a class="btn btn-outline-dark w-100 mt-3 plan-select" href="#signup" data-package="Free Trial">Start Free Trial</a>
+          </article>
+
+          <article class="card price-card p-4 d-flex flex-column">
+            <span class="badge text-bg-info align-self-start mb-3">Launcher</span>
+            <h3 class="h5 fw-bold">Launcher</h3>
+            <p class="plan-label">Start retail execution with essential tracking.</p>
+            <div><span class="plan-price">RM599</span> <span class="plan-period">/ 30 days</span></div>
+            <div class="plan-discounts"><span class="plan-discount">180d RM2,875 · 20% OFF</span><span class="plan-discount">365d RM5,032 · 30% OFF</span></div>
+            <ul class="plan-list">
+              <li><i class="bi bi-check2" aria-hidden="true"></i>Task and visit tracking</li>
+              <li><i class="bi bi-check2" aria-hidden="true"></i>Photo proof reports</li>
+              <li><i class="bi bi-check2" aria-hidden="true"></i>100 AI image credits</li>
+              <li><i class="bi bi-check2" aria-hidden="true"></i>FieldForce access</li>
+            </ul>
+            <div class="plan-capacity">Recommended: 5 active users · 25 visits/day</div>
+            <a class="btn btn-outline-dark w-100 mt-3 plan-select" href="#signup" data-package="Launcher">Select Launcher</a>
+          </article>
+
+          <article class="card price-card featured p-4 d-flex flex-column">
+            <span class="badge text-bg-danger align-self-start mb-3">Highly Recommended</span>
+            <h3 class="h5 fw-bold">Growth</h3>
+            <p class="plan-label">AI visibility for multi-outlet field audits.</p>
+            <div><span class="plan-price">RM1,499</span> <span class="plan-period">/ 30 days</span></div>
+            <div class="plan-discounts"><span class="plan-discount">180d RM7,195 · 20% OFF</span><span class="plan-discount">365d RM12,592 · 30% OFF</span></div>
+            <ul class="plan-list">
+              <li><i class="bi bi-check2" aria-hidden="true"></i>Everything in Launcher</li>
+              <li><i class="bi bi-check2" aria-hidden="true"></i>500 AI image credits</li>
+              <li><i class="bi bi-check2" aria-hidden="true"></i>SOS / OOS / OSA insights</li>
+              <li><i class="bi bi-check2" aria-hidden="true"></i>FieldForce assignment</li>
+            </ul>
+            <div class="plan-capacity">Recommended: 10 active users · 80 visits/day</div>
+            <a class="btn btn-iex w-100 mt-3 plan-select" href="#signup" data-package="Growth">Select Growth</a>
+          </article>
+
+          <article class="card price-card p-4 d-flex flex-column">
+            <span class="badge text-bg-warning align-self-start mb-3">Best Deals</span>
+            <h3 class="h5 fw-bold">Premium AI</h3>
+            <p class="plan-label">Advanced market intelligence and review.</p>
+            <div><span class="plan-price">RM2,999</span> <span class="plan-period">/ 30 days</span></div>
+            <div class="plan-discounts"><span class="plan-discount">180d RM14,395 · 20% OFF</span><span class="plan-discount">365d RM25,192 · 30% OFF</span></div>
+            <ul class="plan-list">
+              <li><i class="bi bi-check2" aria-hidden="true"></i>Everything in Growth</li>
+              <li><i class="bi bi-check2" aria-hidden="true"></i>2,000 AI image credits</li>
+              <li><i class="bi bi-check2" aria-hidden="true"></i>Advanced SOS analytics</li>
+              <li><i class="bi bi-check2" aria-hidden="true"></i>Monthly insight review</li>
+            </ul>
+            <div class="plan-capacity">Recommended: 20 active users · 200 visits/day</div>
+            <a class="btn btn-outline-dark w-100 mt-3 plan-select" href="#signup" data-package="Premium AI">Select Premium AI</a>
+          </article>
+
+          <article class="card price-card p-4 d-flex flex-column">
+            <span class="badge align-self-start mb-3" style="background:#6941c6;">Custom</span>
+            <h3 class="h5 fw-bold">Custom</h3>
+            <p class="plan-label">Customizable enterprise setup by scope.</p>
+            <div><span class="plan-price">Quote</span> <span class="plan-period">by scope</span></div>
+            <div class="plan-discounts"><span class="plan-discount">Custom team and visit volume</span></div>
+            <ul class="plan-list">
+              <li><i class="bi bi-check2" aria-hidden="true"></i>Custom features and dashboard</li>
+              <li><i class="bi bi-check2" aria-hidden="true"></i>Dedicated management</li>
+              <li><i class="bi bi-check2" aria-hidden="true"></i>Custom FieldForce programme</li>
+              <li><i class="bi bi-check2" aria-hidden="true"></i>Custom AI categories</li>
+            </ul>
+            <div class="plan-capacity">Capacity and terms defined by scope</div>
+            <a class="btn btn-outline-dark w-100 mt-3 plan-select" href="#signup" data-package="Custom">Request Custom Quote</a>
+          </article>
+        </div>
+
+        <div class="accordion pricing-details mt-5" id="pricingDetails">
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#featureComparison" aria-expanded="false" aria-controls="featureComparison">Compare package features</button></h3>
+            <div id="featureComparison" class="accordion-collapse collapse" data-bs-parent="#pricingDetails">
+              <div class="accordion-body table-responsive">
+                <table class="table table-striped align-middle pricing-table mb-0">
+                  <thead><tr><th scope="col">Feature Area</th><th scope="col">Free Trial</th><th scope="col">Launcher</th><th scope="col">Growth</th><th scope="col">Premium AI</th><th scope="col">Custom</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">Platform Access</th><td>Limited demo</td><td>Products &amp; outlets</td><td>Products &amp; outlets</td><td>Products &amp; outlets</td><td>Custom scope</td></tr>
+                    <tr><th scope="row">Dashboard</th><td>Basic demo</td><td>Basic</td><td>Basic + AI</td><td>Advanced</td><td>Custom</td></tr>
+                    <tr><th scope="row">AI Shelf / OOS / SOS</th><td>Sample only</td><td>100 AI images</td><td>500 + SOS/OOS/OSA</td><td>2,000 + advanced SOS</td><td>Custom categories</td></tr>
+                    <tr><th scope="row">FieldForce</th><td>Not included</td><td>Marketplace access</td><td>Assignment</td><td>Coordination support</td><td>Custom programme</td></tr>
+                    <tr><th scope="row">Management Services</th><td>Not included</td><td>Optional add-on</td><td>Optional add-on</td><td>Monthly review</td><td>Dedicated management</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#capacityTable" aria-expanded="false" aria-controls="capacityTable">Recommended operating capacity</button></h3>
+            <div id="capacityTable" class="accordion-collapse collapse" data-bs-parent="#pricingDetails">
+              <div class="accordion-body table-responsive">
+                <table class="table align-middle pricing-table mb-0">
+                  <thead><tr><th scope="col">Package</th><th scope="col">Recommended Users</th><th scope="col">Visits / User / Day</th><th scope="col">Daily Visits</th><th scope="col">AI Credits / Month</th></tr></thead>
+                  <tbody><tr><th scope="row">Free Trial</th><td>1 admin</td><td>Sample only</td><td>Demo</td><td>Sample review</td></tr><tr><th scope="row">Launcher</th><td>5</td><td>5</td><td>25</td><td>100</td></tr><tr><th scope="row">Growth</th><td>10</td><td>8</td><td>80</td><td>500</td></tr><tr><th scope="row">Premium AI</th><td>20</td><td>10</td><td>200</td><td>2,000</td></tr><tr><th scope="row">Custom</th><td>By scope</td><td>By scope</td><td>Custom</td><td>Custom</td></tr></tbody>
+                </table>
+                <p class="pricing-note mt-3 mb-0">These figures are practical operating guidance. Paid-package system access remains flexible; confirm final commercial terms before publishing.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#creditTable" aria-expanded="false" aria-controls="creditTable">Extra AI credit pricing</button></h3>
+            <div id="creditTable" class="accordion-collapse collapse" data-bs-parent="#pricingDetails">
+              <div class="accordion-body table-responsive">
+                <table class="table align-middle pricing-table mb-0"><thead><tr><th scope="col">Bundle</th><th scope="col">Price</th><th scope="col">Rate / Image</th><th scope="col">Best For</th></tr></thead><tbody><tr><th scope="row">500 credits</th><td>RM500</td><td>RM1.00</td><td>Small project</td></tr><tr><th scope="row">1,000 credits</th><td>RM900</td><td>RM0.90</td><td>Monthly audit</td></tr><tr><th scope="row">3,000 credits</th><td>RM2,400</td><td>RM0.80</td><td>Multi-outlet</td></tr><tr><th scope="row">5,000 credits</th><td>RM3,500</td><td>RM0.70</td><td>Brand rollout</td></tr><tr><th scope="row">10,000 credits</th><td>RM6,000</td><td>RM0.60</td><td>Enterprise</td></tr></tbody></table>
+                <p class="pricing-note mt-3 mb-0">Credit validity: 6 months. Custom AI category / SKU recognition setup starts from RM500 per category.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="pricing-note mt-4 mb-0">Pricing source: iExRetail Commercial Pricing v5.1. FieldForce job payouts, travel, promoter deployment and special project management are billed separately based on scope.</p>
+      </div>
+    </section>
+
+    <section class="section-pad dark-section" id="signup">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <div class="section-tag mb-2">Sign-Up</div>
+            <h2 class="section-title">Start with the package that fits your operation.</h2>
+            <p class="text-white-50 mt-3">Share your contact details and selected package. This demo continues to the official iExpress WhatsApp so you stay in control of sending the request.</p>
+            <div class="d-flex align-items-start gap-3 mt-4 text-white-50 small"><i class="bi bi-shield-check fs-4 text-success" aria-hidden="true"></i><span>No form data is stored by this GitHub Pages demo. A secure backend can be connected before production launch.</span></div>
+          </div>
+          <div class="col-lg-6">
+            <form class="dark-card p-4 needs-validation" id="signupForm" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6"><label class="form-label" for="signupName">Name</label><input class="form-control" id="signupName" name="name" type="text" autocomplete="name" placeholder="Your name" required><div class="invalid-feedback">Please enter your name.</div></div>
+                <div class="col-md-6"><label class="form-label" for="signupCompany">Company</label><input class="form-control" id="signupCompany" name="company" type="text" autocomplete="organization" placeholder="Company name" required><div class="invalid-feedback">Please enter your company.</div></div>
+                <div class="col-md-6"><label class="form-label" for="signupEmail">Email</label><input class="form-control" id="signupEmail" name="email" type="email" autocomplete="email" placeholder="name@company.com" required><div class="invalid-feedback">Please enter a valid email address.</div></div>
+                <div class="col-md-6"><label class="form-label" for="signupPhone">Mobile Number</label><input class="form-control" id="signupPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+60105677881" pattern="(?:\+?6?01)[0-46-9][0-9]{7,8}" required><div class="invalid-feedback">Enter a valid Malaysian mobile number without spaces.</div></div>
+                <div class="col-12"><label class="form-label" for="signupPackage">Package</label><select class="form-select" id="signupPackage" name="package" required><option value="" selected disabled>Select a package</option><option>Free Trial</option><option>Launcher</option><option>Growth</option><option>Premium AI</option><option>Custom</option></select><div class="invalid-feedback">Please select a package.</div></div>
+                <div class="col-12"><label class="form-label" for="signupMessage">Message</label><textarea class="form-control" id="signupMessage" name="message" rows="3" placeholder="Tell us about your outlets, campaign or reporting needs."></textarea></div>
+                <div class="visually-hidden" aria-hidden="true"><label for="signupWebsite">Website</label><input id="signupWebsite" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+                <div class="col-12"><div class="form-check"><input class="form-check-input" id="signupConsent" type="checkbox" required><label class="form-check-label small text-white-50" for="signupConsent">I acknowledge the PDPA notice and agree to the applicable Terms &amp; Conditions.</label><div class="invalid-feedback">Please acknowledge PDPA and the Terms &amp; Conditions.</div></div></div>
+                <div class="col-12"><button class="btn btn-iex w-100" type="submit">Sign-Up via WhatsApp</button></div>
+                <div class="col-12"><div class="alert alert-success d-none mb-0" id="signupStatus" role="status">Your details are ready. Complete the request in WhatsApp to send it.</div></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="container footer-top-inner">
+        <div class="footer-brand">
+          <a href="#hero" aria-label="Back to iExRetail home"><img src="images/iExRetail Logo_White_ver_ai_OL.png" alt="iExRetail" class="footer-logo-img"></a>
+          <p class="footer-tagline">AI-powered retail execution and field force management, built for Malaysian brands.</p>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/iExpress.my/" target="_blank" rel="noopener" aria-label="Facebook"><img src="images/facebook.png" alt=""></a>
+            <a href="https://www.instagram.com/iexpress.my" target="_blank" rel="noopener" aria-label="Instagram"><img src="images/instagram.png" alt=""></a>
+            <a href="https://wa.me/60105677881" target="_blank" rel="noopener" aria-label="WhatsApp"><img src="images/whatsapp.png" alt=""></a>
+            <a href="https://www.tiktok.com/@iexpress.my" target="_blank" rel="noopener" aria-label="TikTok"><img src="images/tiktok.png" alt=""></a>
+            <a href="https://www.youtube.com/@iExpressMY" target="_blank" rel="noopener" aria-label="YouTube"><img src="images/youtube.png" alt=""></a>
+            <a href="https://www.linkedin.com/company/iExpress" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="images/linkedin.png" alt=""></a>
+          </div>
+        </div>
+        <div class="footer-links-grid">
+          <div class="footer-link-col">
+            <h4>Platform</h4>
+            <ul>
+              <li><a href="#problem">Why iExRetail</a></li>
+              <li><a href="#features">Core Features</a></li>
+              <li><a href="#product-demo">Merchandising / Audit</a></li>
+            </ul>
+          </div>
+          <div class="footer-link-col">
+            <h4>Product Demo</h4>
+            <ul>
+              <li><a href="#product-demo">Shelf Reporting Visibility</a></li>
+              <li><a href="#product-demo">FieldForce Workflow</a></li>
+              <li><a href="#product-demo">AI Visual Intelligence</a></li>
+            </ul>
+          </div>
+          <div class="footer-link-col">
+            <h4>Explore</h4>
+            <ul>
+              <li><a href="#problem">Why iExRetail</a></li>
+              <li><a href="#pricing">Plans &amp; Pricing</a></li>
+              <li><a href="#signup">Sign-Up</a></li>
+            </ul>
+          </div>
+          <div class="footer-link-col">
+            <h4>Get in Touch</h4>
+            <ul>
+              <li><a href="mailto:info@iexpress.my">info@iexpress.my</a></li>
+              <li><a href="tel:+60105677881">+60 10-567 7881</a></li>
+              <li><a href="https://www.iexpress.com.my/" target="_blank" rel="noopener">iexpress.com.my</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; 2026 iExRetail &middot; All rights reserved</p>
+        <div class="footer-bottom-right">
+          <span>Product by</span>
+          <a href="https://www.iexpress.com.my/" target="_blank" rel="noopener"><img src="images/iexpress-logo-horizontal.jpg" alt="iExpress" class="footer-partner-logo"></a>
+          <span class="footer-dot">&middot;</span>
+          <span>Powered by</span>
+          <img src="images/interact-logo-white.png" alt="Interact - Business through Technology" class="footer-interact-logo">
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/bootstrap.bundle.min.js"></script>
+  <script>
+    const workflowSteps = document.querySelectorAll(".workflow-step");
+    let activeWorkflowStep = 0;
+
+    if (workflowSteps.length) {
+      setInterval(() => {
+        workflowSteps[activeWorkflowStep].classList.remove("active");
+        activeWorkflowStep = (activeWorkflowStep + 1) % workflowSteps.length;
+        workflowSteps[activeWorkflowStep].classList.add("active");
+      }, 1600);
+    }
+
+    const scanResult = document.getElementById("scanResult");
+    const detectionBoxes = document.querySelectorAll(".detection-box[data-result]");
+    detectionBoxes.forEach((box) => {
+      box.addEventListener("click", () => {
+        detectionBoxes.forEach((item) => item.classList.remove("is-active"));
+        box.classList.add("is-active");
+        if (scanResult) scanResult.innerHTML = `<strong>${box.dataset.title}:</strong> ${box.dataset.result}`;
+      });
+    });
+
+    const comparisonFrame = document.getElementById("comparisonFrame");
+    const comparisonRange = document.getElementById("comparisonRange");
+
+    if (comparisonFrame && comparisonRange) {
+      comparisonRange.addEventListener("input", (event) => {
+        const position = Number(event.target.value);
+        comparisonFrame.style.setProperty("--compare-position", `${position}%`);
+        event.target.setAttribute("aria-valuetext", `${position}% before and ${100 - position}% after`);
+      });
+    }
+
+    const navbar = document.querySelector(".navbar");
+    const updateNavbar = () => navbar?.classList.toggle("is-scrolled", window.scrollY > 24);
+    updateNavbar();
+    window.addEventListener("scroll", updateNavbar, { passive: true });
+
+    document.querySelectorAll("#mainNavigation .nav-link").forEach((link) => {
+      link.addEventListener("click", () => {
+        const navigation = document.getElementById("mainNavigation");
+        if (navigation?.classList.contains("show")) bootstrap.Collapse.getOrCreateInstance(navigation).hide();
+      });
+    });
+
+    const packageSelect = document.getElementById("signupPackage");
+    document.querySelectorAll(".plan-select[data-package]").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (packageSelect) packageSelect.value = button.dataset.package;
+      });
+    });
+
+    const signupForm = document.getElementById("signupForm");
+    const signupStatus = document.getElementById("signupStatus");
+    const formStartedAt = Date.now();
+    signupForm?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      signupForm.classList.add("was-validated");
+      if (!signupForm.checkValidity()) return;
+
+      const honeypot = document.getElementById("signupWebsite");
+      if (honeypot?.value || Date.now() - formStartedAt < 1200) return;
+
+      const fields = new FormData(signupForm);
+      const message = [
+        "Hi! I would like to sign up for iExRetail.",
+        "",
+        `Name: ${fields.get("name")}`,
+        `Company: ${fields.get("company")}`,
+        `Email: ${fields.get("email")}`,
+        `Mobile: ${fields.get("phone")}`,
+        `Package: ${fields.get("package")}`,
+        `Message: ${fields.get("message") || "-"}`
+      ].join("\n");
+
+      signupStatus?.classList.remove("d-none");
+      window.open(`https://wa.me/60105677881?text=${encodeURIComponent(message)}`, "_blank", "noopener");
+    });
+
+    const countTargets = document.querySelectorAll("[data-count]");
+    const runCount = (element) => {
+      const target = Number(element.dataset.count || 0);
+      const suffix = element.dataset.suffix || "";
+      const started = performance.now();
+      const duration = 900;
+      const tick = (now) => {
+        const progress = Math.min((now - started) / duration, 1);
+        element.textContent = `${Math.round(target * (1 - Math.pow(1 - progress, 3)))}${suffix}`;
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+
+    if ("IntersectionObserver" in window) {
+      const countObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            runCount(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: .7 });
+      countTargets.forEach((element) => countObserver.observe(element));
+    } else {
+      countTargets.forEach(runCount);
+    }
+
+    const revealTargets = document.querySelectorAll(".section-tag, .section-title, .feature-card, .price-card, .pricing-includes, .pricing-details");
+    revealTargets.forEach((element, index) => {
+      element.classList.add("reveal");
+      if (index % 3 === 1) element.classList.add("reveal-left");
+      if (index % 3 === 2) element.classList.add("reveal-scale");
+    });
+
+    if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: .12 });
+      revealTargets.forEach((element) => revealObserver.observe(element));
+    } else {
+      revealTargets.forEach((element) => element.classList.add("is-visible"));
+    }
+
+  </script>
+</body>
+</html>
